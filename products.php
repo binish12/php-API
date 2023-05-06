@@ -9,7 +9,7 @@
 
     //Applying User Login query with email and password.
     
-       $userQuery = "SELECT * FROM user_sessions WHERE token ='$access_token'";
+       $userQuery = "SELECT * FROM personal_access_token WHERE token ='$access_token'";
        $sendingQuery = mysqli_query($con, $userQuery);
        $checkQuery = mysqli_num_rows($sendingQuery);
    
@@ -38,7 +38,7 @@ function getProducts()
 {
     global $con;
 
-    $sql = "SELECT * FROM products where is_deleted=0";
+    $sql = "SELECT * FROM products where product_id=1";
     $query = mysqli_query($con, $sql);
 
     if ($query) {

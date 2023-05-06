@@ -3,7 +3,7 @@
 include 'DatabaseConfig.php';
 include 'helper_functions/authentication_functions.php';
 
-$isAdmin = checkIfMerchant($_POST['token'] ?? null) || checkIfAdmin($_POST['token'] ?? null);
+$isAdmin = checkIfAdmin($_POST['token'] ?? null);
 if ($isAdmin) {
     if (isset($_POST['name']) 
     && isset($_POST['description']) 

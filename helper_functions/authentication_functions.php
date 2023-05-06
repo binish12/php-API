@@ -1,10 +1,10 @@
 <?php
-function signUp($username, $password)
+function signUp($full_name, $username, $address, $phone_number, $password)
 {
     //insert the user into the database
     global $con;
     $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-    $insert_user = "INSERT INTO users (username, password) VALUES ('$username', '$encrypted_password')";
+    $insert_user = "INSERT INTO members (full_name, email, address,phone_number, password) VALUES ('$full_name','$username','$address','$phone_number','$encrypted_password')";
     $result = mysqli_query($con, $insert_user);
     if ($result) {
         echo json_encode(
@@ -54,7 +54,7 @@ function login($password, $databasePassword, $userID, $role)
         $token = bin2hex(openssl_random_pseudo_bytes(16));
         //insert the token into the database
         global $con;
-        $insert_token = "INSERT INTO personal_access_token (user_id, token) VALUES ('$userID', '$token')";
+        $insert_token = "INSERT INTO personal_access_tokens (member_id, token) VALUES ('$userID', '$token')";
         $result = mysqli_query($con, $insert_token);
         if ($result) {
             echo json_encode(
@@ -62,7 +62,8 @@ function login($password, $databasePassword, $userID, $role)
                     'success' => true,
                     'message' => 'User logged in successfully',
                     'token' => $token,
-                    'role'=>$role
+                    'role' => $role
+                    
                 ]
             );
         } else {

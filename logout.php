@@ -7,16 +7,16 @@
     {
         $access_token = $_POST['token'];
 
-        if( isset($_POST['user_id']) )
+        if( isset($_POST['member_id']) )
         {
-            $userid = $_POST['user_id'];
+            $userid = $_POST['member_id'];
             //logging out user for particular device...
-            $query = "DELETE FROM personal_access_token WHERE user_id='$userid'";
+            $query = "DELETE FROM personal_access_tokens WHERE member_id='$userid'";
 
         }else{
 
             //logging out user for all devices...
-            $query = "DELETE FROM personal_access_token WHERE token='$access_token'";
+            $query = "DELETE FROM personal_access_tokens WHERE token='$access_token'";
 
         }
         $query = mysqli_query($con, $query);
